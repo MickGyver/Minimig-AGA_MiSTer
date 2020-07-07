@@ -109,7 +109,10 @@ module emu
 );
 
 assign ADC_BUS  = 'Z;
-assign USER_OUT = '1;
+assign USER_OUT[0] = '1;
+assign USER_OUT[3] = '1;
+assign USER_OUT[5] = '1;
+assign USER_OUT[6] = '1;
 assign {SD_SCK, SD_MOSI, SD_CS} = 'Z;
 assign BUTTONS = 0;
 
@@ -462,13 +465,13 @@ minimig minimig
 	.eclk         (eclk             ), // 0.709379 MHz clock enable output (clk domain pulse)
 
 	//rs232 pins
-	.rxd          (UART_RXD         ), // RS232 receive
-	.txd          (UART_TXD         ), // RS232 send
-	.cts          (UART_CTS         ), // RS232 clear to send
-	.rts          (UART_RTS         ), // RS232 request to send
-	.dtr          (UART_DTR         ), // RS232 Data Terminal Ready
-	.dsr          (UART_DSR         ), // RS232 Data Set Ready
-	.cd           (UART_DSR         ), // RS232 Carrier Detect
+	.rxd          (USER_IN[0]       ), // RS232 receive
+	.txd          (USER_OUT[1]      ), // RS232 send
+	.cts          (USER_IN[3]       ), // RS232 clear to send
+	.rts          (USER_OUT[2]      ), // RS232 request to send
+	.dtr          (USER_OUT[4]      ), // RS232 Data Terminal Ready
+	.dsr          (USER_IN[5]       ), // RS232 Data Set Ready
+	.cd           (USER_IN[6]       ), // RS232 Carrier Detect
 	.ri           (1                ), // RS232 Ring Indicator
 
 	//I/O
